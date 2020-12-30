@@ -1,0 +1,12 @@
+{
+  "name": "record-scanner",
+  "displayName": "record-scanner",
+  "expo": {
+    "name": "record-scanner",
+    "slug": "record-scanner",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
