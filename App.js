@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import ScanScreen from "./src/screens/ScannerScreen";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+import { setNavigator } from "./src/navigationRef";
+
+const switchNavigator = createSwitchNavigator({
+  mainFlow: createBottomTabNavigator({
+    Scan: ScanScreen,
+  }),
 });
+
+const App = createAppContainer(switchNavigator);
+
+export default () => {
+  return (
+    <App
+      ref={(navigator) => {
+        setNavigator(navigator);
+      }}
+    />
+  );
+};
