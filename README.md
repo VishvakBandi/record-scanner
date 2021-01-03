@@ -9,13 +9,14 @@
 - asks for permission
 
 ### todo - MVP
-- add functionality to interface wit hthe discogs API
+- add functionality to interface with the discogs API
 - after the scan is complete, move the user to a new screen with info about the record
 - link the user to a spotify/youtube to listen
-- show value of the record
+- show value (in dollars) of the record
 
 ### todo - Extra Features
 - build a backend lol
 - store record information in a database
 - show database in seperate screen
 - some analytics things
+- user accounts
