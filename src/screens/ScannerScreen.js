@@ -3,8 +3,7 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 import discogsAPI from "../API/discogs";
-import config from "../../config";
-import axios from "axios";
+import { config } from "../../config";
 
 const ScannerScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -27,27 +26,24 @@ const ScannerScreen = () => {
 
   async function getDataWithBarcode(data) {
     try {
-      /* const response = await discogsAPI.get(
-        "database/search",
-        {
-          params: {
-            barcode: data,
-          },
+      // API call with literal definitions for everything
+      // const SIG = `&key=${config.key}&secret=${config.secret}`;
+      // console.log(SIG);
+      // const requestURL = `https://api.discogs.com/database/search?barcode=${data}${SIG}`;
+
+      // const response = await axios.get(requestURL);
+
+      // call the Discogs API
+      // returns config data, the API response, headers, bunch of other data
+      const response = await discogsAPI.get("database/search", {
+        params: {
+          barcode: data,
+          key: config.key,
+          secret: config.secret,
         },
-        {
-          headers: {
-            Authorization: `Discogs key=${config.key}, secret=${config.secret}`,
-          },
-        }
-      );
-      */
-      const SIG = `&key=${config.key}&secret=${config.secret}`;
-      const requestURL = `https://api.discogs.com/database/search?barcode=${data}&key=xJibNNdNUNHWJZQrVBcx&secret=omPNJHWHoZmNlPvtbRjzuhtDyrIXqQAq`;
+      });
 
-      const response = await axios.get(requestURL);
-
-      console.log(response);
-      console.log("hi");
+      console.log(response.data.results[0].title);
     } catch (err) {
       console.log(err);
     }
