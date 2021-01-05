@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 
-const Home = () => {
+const displaySearch = () => {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Display Screen</Text>
       <Text>Use the bottom tab to get to the camera screen</Text>
     </View>
   );
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default displaySearch;
