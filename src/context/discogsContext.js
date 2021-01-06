@@ -28,6 +28,9 @@ const barcodeSearch = (dispatch) => {
       // const response = await axios.get(requestURL);
 
       // call the Discogs API
+
+      console.log(barcode);
+
       const response = await discogsAPI.get("database/search", {
         params: {
           barcode: barcode,
@@ -38,9 +41,9 @@ const barcodeSearch = (dispatch) => {
 
       dispatch({ type: "barcodeSearch", payload: response.data });
 
-      console.log(response.data);
+      //console.log(response.data);
 
-      navigate("Results");
+      navigate("Results", { response: response });
     } catch (err) {
       console.log(err);
 
