@@ -18,8 +18,9 @@ const discogsReducer = (state, action) => {
 };
 
 const barcodeSearch = (dispatch) => {
-  return async ({ barcode }) => {
+  return async (data) => {
     try {
+      const barcode = data;
       // API call with literal definitions for everything
       // const SIG = `&key=${config.key}&secret=${config.secret}`;
       // console.log(SIG);
@@ -28,6 +29,7 @@ const barcodeSearch = (dispatch) => {
       // const response = await axios.get(requestURL);
 
       // call the Discogs API
+
       const response = await discogsAPI.get("database/search", {
         params: {
           barcode: barcode,
@@ -38,9 +40,9 @@ const barcodeSearch = (dispatch) => {
 
       dispatch({ type: "barcodeSearch", payload: response.data });
 
-      console.log(response.data);
+      //console.log(response.data);
 
-      navigate("Results");
+      navigate("Results", { response: response });
     } catch (err) {
       console.log(err);
 
