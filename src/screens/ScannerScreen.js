@@ -29,7 +29,9 @@ const ScannerScreen = () => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
 
-    barcodeSearch({ data });
+    console.log(data);
+
+    barcodeSearch(data);
   };
 
   return (
