@@ -21,6 +21,7 @@ const barcodeSearch = (dispatch) => {
   return async (data) => {
     try {
       const barcode = data;
+
       // API call with literal definitions for everything
       // const SIG = `&key=${config.key}&secret=${config.secret}`;
       // console.log(SIG);
@@ -43,6 +44,7 @@ const barcodeSearch = (dispatch) => {
       //console.log(response.data);
 
       navigate("Results", { response: response });
+
     } catch (err) {
       console.log(err);
 

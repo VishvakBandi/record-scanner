@@ -11,6 +11,7 @@ const displaySearch = (props) => {
   return (
     <View style={styles.container}>
       <Text>Display Screen</Text>
+
     </View>
   );
 };

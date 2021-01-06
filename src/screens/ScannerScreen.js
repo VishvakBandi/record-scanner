@@ -30,7 +30,7 @@ const ScannerScreen = () => {
     setScanned(true);
 
     console.log(data);
-
+    
     barcodeSearch(data);
   };
 
