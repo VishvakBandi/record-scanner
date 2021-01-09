@@ -3,10 +3,13 @@ import discogsAPI from "../API/discogs";
 import { navigate } from "../navigationRef";
 
 import { config } from "../../config";
+import { ActionSheetIOS } from "react-native";
 
 const discogsReducer = (state, action) => {
   switch (action.type) {
     case "barcodeSearch":
+      return { errorMessage: "", data: action.payload };
+    case "masterIdSearch":
       return { errorMessage: "", data: action.payload };
     case "add_error":
       return { ...state, errorMessage: action.payload };
@@ -17,10 +20,28 @@ const discogsReducer = (state, action) => {
   }
 };
 
+const masterIdSearch = (dispatch) => {
+  return async (data) => {
+    try {
+      const APIString = "masters/" + data;
+
+      const response = await discogsAPI.get(APIString);
+
+      dispatch({ type: "barcodeSearch", payload: response.data });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: "add_error",
+        payload: "Something went wrong, sign up later",
+      });
+    }
+  };
+};
+
 const barcodeSearch = (dispatch) => {
   return async (data) => {
     try {
-      const barcode = data;
+      const barcode = "6 02537 70731 7";
 
       // API call with literal definitions for everything
       // const SIG = `&key=${config.key}&secret=${config.secret}`;
@@ -44,7 +65,6 @@ const barcodeSearch = (dispatch) => {
       //console.log(response.data);
 
       navigate("Results", { response: response });
-
     } catch (err) {
       console.log(err);
 

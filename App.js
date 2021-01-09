@@ -7,6 +7,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import ScanScreen from "./src/screens/ScannerScreen";
 import HomeScreen from "./src/screens/Home";
 import ResultsScreen from "./src/screens/displaySearch";
+import LoadingScreen from "./src/screens/loadingScreen";
 
 import { Provider as DiscogsProvider } from "./src/context/discogsContext";
 
@@ -17,6 +18,7 @@ const stackNavigator = createStackNavigator({
     {
       Home: HomeScreen,
       Scan: ScanScreen,
+      Results: ResultsScreen,
     },
     {
       initialRouteName: "Home",
@@ -25,7 +27,7 @@ const stackNavigator = createStackNavigator({
       barStyle: { backgroundColor: "#694fad" },
     }
   ),
-  Results: ResultsScreen,
+  Loading: LoadingScreen,
 });
 
 const App = createAppContainer(stackNavigator);
