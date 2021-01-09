@@ -2,10 +2,10 @@ import React from "react";
 import { AcitvityIndicator, StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from 'expo-splash-screen';
 
-const LoadingScreen = () => {
+class LoadingScreen extends React.Component {
   state = { appIsReady: false };
   
-  componentDidMount = async () => {
+  async componentDidMount {
     // Prevent native splash screen from autohiding
     try {
       await SplashScreen.preventAutoHideAsync();
