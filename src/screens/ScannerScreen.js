@@ -2,15 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
+import { navigate } from "../navigationRef";
+
 import { Context as DiscogsContext } from "../context/discogsContext";
 
 const ScannerScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-
-  const { state, barcodeSearch, clearErrorMessage } = useContext(
-    DiscogsContext
-  );
 
   useEffect(() => {
     (async () => {
@@ -30,8 +28,8 @@ const ScannerScreen = () => {
     setScanned(true);
 
     console.log(data);
-    
-    barcodeSearch(data);
+
+    navigate("Results", { data: data });
   };
 
   return (

@@ -63,8 +63,6 @@ const barcodeSearch = (dispatch) => {
       dispatch({ type: "barcodeSearch", payload: response.data });
 
       //console.log(response.data);
-
-      navigate("Results", { response: response });
     } catch (err) {
       console.log(err);
 
