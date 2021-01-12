@@ -39,9 +39,9 @@ const masterIdSearch = (dispatch) => {
 };
 
 const barcodeSearch = (dispatch) => {
-  return async (data) => {
+  return async (barcodeNum) => {
     try {
-      const barcode = "6 02537 70731 7";
+      //console.log(barcodeNum);
 
       // API call with literal definitions for everything
       // const SIG = `&key=${config.key}&secret=${config.secret}`;
@@ -54,15 +54,15 @@ const barcodeSearch = (dispatch) => {
 
       const response = await discogsAPI.get("database/search", {
         params: {
-          barcode: barcode,
+          barcode: "6 02537 70731 7",
           key: config.key,
           secret: config.secret,
         },
       });
 
-      dispatch({ type: "barcodeSearch", payload: response.data });
+      // console.log(response.data);
 
-      //console.log(response.data);
+      await dispatch({ type: "barcodeSearch", payload: response.data });
     } catch (err) {
       console.log(err);
 

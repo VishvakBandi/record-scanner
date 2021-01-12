@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { render } from "react-dom";
 import { Text, View, StyleSheet, Image } from "react-native";
 
@@ -7,24 +7,19 @@ import Loading from "./loadingScreen";
 import { Context as DiscogsContext } from "../context/discogsContext";
 
 const displaySearch = (props) => {
-  const data = props.navigation.state.params.data;
-  let response;
+  const barcodeNum = props.navigation.state.params.data;
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const { state, barcodeSearch, clearErrorMessage } = useContext(
-    DiscogsContext
-  );
+  const { state, barcodeSearch } = useContext(DiscogsContext);
 
-  const loadData = () => async () => {
-    setIsLoading(true);
+  useEffect(() => {
+    (async () => {
+      await barcodeSearch(barcodeNum);
 
-    try {
-      response = await barcodeSearch(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+      setIsLoading(false);
+    })();
+  }, [barcodeNum]);
 
   // const navigationProps = props.navigation.state.params;
   // const discogsResponse = navigationProps.response.data.results[0];
@@ -34,9 +29,19 @@ const displaySearch = (props) => {
   if (isLoading === true) {
     return <Loading loadingText="Loading..." />;
   } else {
+    const discogsResponse = state.data.results[0];
+
     return (
       <View style={styles.container}>
         <Text>Display Screen</Text>
+        <Image
+          style={styles.cover}
+          source={{ uri: discogsResponse.cover_image }}
+        />
+        <Text>
+          Scanned record - {discogsResponse.title}, released in the year
+          {discogsResponse.year}, under the label {discogsResponse.label[0]}
+        </Text>
       </View>
     );
   }
