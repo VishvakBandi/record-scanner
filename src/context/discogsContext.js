@@ -42,7 +42,7 @@ const barcodeSearch = (dispatch) => {
   return async (barcodeNum) => {
     try {
       //console.log(barcodeNum);
-
+      
       // API call with literal definitions for everything
       // const SIG = `&key=${config.key}&secret=${config.secret}`;
       // console.log(SIG);
@@ -59,6 +59,7 @@ const barcodeSearch = (dispatch) => {
           secret: config.secret,
         },
       });
+
 
       // console.log(response.data);
 
