@@ -3,8 +3,16 @@ import { ActivityIndicator, Text, View, StyleSheet } from "react-native";
 
 const LoadingScreen = (props) => {
   return (
-    <View style={[styles.containter, styles.horizontal]}>
-      <ActivityIndicator animating={true} color="black" size="large" />
+    <View style={styles.container}>
+      <View style={styles.materialSpinnerStack}>
+        <ActivityIndicator
+          style={styles.materialSpinner}
+          animating={true}
+          color="black"
+          size="large"
+        />
+        <Text style={styles.loading}>{props.loadingText}</Text>
+      </View>
     </View>
   );
 };
@@ -14,10 +22,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
+  materialSpinner: {
+    width: 50,
+    height: 50,
+    left: 0,
+    top: 0,
+  },
+  loading: {
+    top: 43,
+    left: 0,
+    position: "absolute",
+    color: "#121212",
+  },
+  materialSpinnerStack: {
+    alignSelf: "center",
   },
 });
 

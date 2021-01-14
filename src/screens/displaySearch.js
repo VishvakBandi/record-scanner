@@ -11,12 +11,12 @@ const displaySearch = (props) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const { state, barcodeSearch } = useContext(DiscogsContext);
+  const { state, barcodeSearch, masterIdSearch } = useContext(DiscogsContext);
 
   useEffect(() => {
     (async () => {
       await barcodeSearch(barcodeNum);
-
+      console.log(state);
       setIsLoading(false);
     })();
   }, [barcodeNum]);
@@ -30,6 +30,17 @@ const displaySearch = (props) => {
     return <Loading loadingText="Loading..." />;
   } else {
     const discogsResponse = state.data.results[0];
+
+    /* try {
+      const masterId = discogsResponse.master_id;
+      (async () => {
+        await masterIdSearch(masterId);
+
+        console.log(state);
+      })();
+    } catch (err) {
+      console.log(err);
+    } */
 
     return (
       <View style={styles.container}>
@@ -61,6 +72,11 @@ const styles = StyleSheet.create({
   cover: {
     width: 100,
     height: 100,
+  },
+  materialSpinner: {
+    width: 50,
+    height: 50,
+    alignSelf: "center",
   },
 });
 
