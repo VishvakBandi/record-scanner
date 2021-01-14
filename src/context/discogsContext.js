@@ -21,15 +21,16 @@ const discogsReducer = (state, action) => {
 };
 
 const masterIdSearch = (dispatch) => {
-  return async (data) => {
+  return async (masterId) => {
     try {
-      const APIString = "masters/" + data;
+      const APIString = "masters/" + masterId;
 
       const response = await discogsAPI.get(APIString);
 
       dispatch({ type: "barcodeSearch", payload: response.data });
     } catch (err) {
       console.log(err);
+
       dispatch({
         type: "add_error",
         payload: "Something went wrong, sign up later",
@@ -42,7 +43,7 @@ const barcodeSearch = (dispatch) => {
   return async (barcodeNum) => {
     try {
       //console.log(barcodeNum);
-      
+
       // API call with literal definitions for everything
       // const SIG = `&key=${config.key}&secret=${config.secret}`;
       // console.log(SIG);
@@ -59,7 +60,6 @@ const barcodeSearch = (dispatch) => {
           secret: config.secret,
         },
       });
-
 
       // console.log(response.data);
 
@@ -84,6 +84,6 @@ const clearErrorMessage = (dispatch) => () => {
 // a provider and context are returned
 export const { Provider, Context } = createDataContext(
   discogsReducer,
-  { barcodeSearch, clearErrorMessage },
+  { barcodeSearch, masterIdSearch, clearErrorMessage },
   { token: null, errorMessage: "" }
 );
