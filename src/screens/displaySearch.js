@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Text, View, StyleSheet, Image } from "react-native";
 
 import Loading from "./loadingScreen";
+import Card from "../components/card";
 
 import { Context as DiscogsContext } from "../context/discogsContext";
 
@@ -16,7 +17,7 @@ const displaySearch = (props) => {
   useEffect(() => {
     (async () => {
       await barcodeSearch(barcodeNum);
-      console.log(state);
+      //console.log(state);
       setIsLoading(false);
     })();
   }, [barcodeNum]);
@@ -44,39 +45,38 @@ const displaySearch = (props) => {
 
     return (
       <View style={styles.container}>
-        <Text>Display Screen</Text>
-        <Image
+        <Card
           style={styles.cover}
-          source={{ uri: discogsResponse.cover_image }}
+          coverImage={discogsResponse.cover_image}
+          title={discogsResponse.title}
+          year={discogsResponse.year}
+          genre={discogsResponse.genre}
         />
-        <Text>
-          Scanned record - {discogsResponse.title}, released in the year
-          {discogsResponse.year}, under the label {discogsResponse.label[0]}
-        </Text>
       </View>
+
+      /*<View style={styles.container}>
+      <Text>Display Screen</Text>
+      <Image
+        style={styles.cover}
+        source={{ uri: discogsResponse.cover_image }}
+      />
+      <Text>
+        Scanned record - {discogsResponse.title}, released in the year
+        {discogsResponse.year}, under the label {discogsResponse.label[0]}
+      </Text>
+    </View>; */
     );
   }
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  tinyCover: {
-    width: 50,
-    height: 50,
+    width: 333,
+    height: 336,
   },
   cover: {
-    width: 100,
-    height: 100,
-  },
-  materialSpinner: {
-    width: 50,
-    height: 50,
-    alignSelf: "center",
+    width: 333,
+    height: 336,
   },
 });
 
