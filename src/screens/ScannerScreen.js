@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 import { navigate } from "../navigationRef";
-
-import { Context as DiscogsContext } from "../context/discogsContext";
 
 const ScannerScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);

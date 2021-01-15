@@ -1,7 +1,6 @@
 import React from "react";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
 import ScanScreen from "./src/screens/ScannerScreen";
@@ -13,12 +12,25 @@ import { Provider as DiscogsProvider } from "./src/context/discogsContext";
 
 import { setNavigator } from "./src/navigationRef";
 
+import Icon from "react-native-vector-icons/Ionicons";
+
 const stackNavigator = createStackNavigator({
   mainFlow: createMaterialBottomTabNavigator(
     {
-      Home: HomeScreen,
-      Scan: ScanScreen,
-      Results: ResultsScreen,
+      Home: {
+        screen: HomeScreen,
+        navigationOptions: {
+          tabBarLabel: "Home",
+          tabBarIcon: () => <Icon name="ios-home" color="white" size={25} />,
+        },
+      },
+      Scan: {
+        screen: ScanScreen,
+        navigationOptions: {
+          tabBarLabel: "Scan",
+          tabBarIcon: () => <Icon name="scan-sharp" color="white" size={25} />,
+        },
+      },
     },
     {
       initialRouteName: "Home",
@@ -27,6 +39,7 @@ const stackNavigator = createStackNavigator({
       barStyle: { backgroundColor: "#694fad" },
     }
   ),
+  Results: ResultsScreen,
   Loading: LoadingScreen,
 });
 

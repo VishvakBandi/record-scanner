@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AcitvityIndicator, StyleSheet, Text, View } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 
 class LoadingScreen extends React.Component {
@@ -41,13 +41,13 @@ class LoadingScreen extends React.Component {
 }
 
 // Put any code you need to prepare your app in these functions
-async function performAPICalls() {
+/* async function performAPICalls() {
   const { state, barcodeSearch, clearErrorMessage } = useContext(
     DiscogsContext
   );
 }
 async function downloadAssets() {}
-
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
