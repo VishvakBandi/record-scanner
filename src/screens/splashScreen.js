@@ -41,13 +41,13 @@ class LoadingScreen extends React.Component {
 }
 
 // Put any code you need to prepare your app in these functions
-async function performAPICalls() {
+/* async function performAPICalls() {
   const { state, barcodeSearch, clearErrorMessage } = useContext(
     DiscogsContext
   );
 }
 async function downloadAssets() {}
-
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
