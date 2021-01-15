@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AcitvityIndicator, StyleSheet, Text, View } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 
 class LoadingScreen extends React.Component {

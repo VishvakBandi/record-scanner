@@ -1,9 +1,7 @@
 import createDataContext from "./createDataContext";
 import discogsAPI from "../API/discogs";
-import { navigate } from "../navigationRef";
 
 import { config } from "../../config";
-import { ActionSheetIOS } from "react-native";
 
 const discogsReducer = (state, action) => {
   switch (action.type) {

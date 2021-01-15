@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { render } from "react-dom";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import Loading from "./loadingScreen";
 import Card from "../components/card";
