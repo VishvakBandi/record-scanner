@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 
-import Loading from "./loadingScreen";
+import Loading from "../components/loadingScreen";
 import Card from "../components/card";
 
 import { Context as DiscogsContext } from "../context/discogsContext";
