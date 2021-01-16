@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
@@ -32,6 +33,9 @@ const stackNavigator = createStackNavigator({
       },
     },
     {
+      navigationOptions: {
+        headerShown: false,
+      },
       initialRouteName: "Home",
       activeColor: "#f0edf6",
       inactiveColor: "#3e2465",
