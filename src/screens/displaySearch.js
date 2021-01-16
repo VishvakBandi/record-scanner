@@ -70,12 +70,17 @@ const displaySearch = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 333,
-    height: 336,
+    //width: 333,
+    //height: 336,
+    padding: 10,
   },
   cover: {
-    width: 333,
+    width: "100%",
     height: 336,
+    //padding: "10",
+    //width: "333",
+    //height: "336",
+    //flex: 1,
   },
 });
 
