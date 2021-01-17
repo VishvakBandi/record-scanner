@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
-function MaterialCardWithTextOverImage(props) {
+function Card(props) {
   return (
     <View style={[styles.container, props.style]}>
       <Image
         source={{ uri: props.coverImage }}
-        style={styles.cardItemImagePlace}
+        style={styles.cardImage}
       ></Image>
       <View style={styles.cardBody}>
         <View style={styles.bodyContent}>
@@ -31,10 +31,10 @@ function MaterialCardWithTextOverImage(props) {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderRadius: 2,
+    borderRadius: 15,
     borderColor: "#CCC",
     flexWrap: "nowrap",
-    backgroundColor: "#FFF",
+    backgroundColor: "#c2c2c2",
     shadowColor: "#000",
     shadowOffset: {
       width: -2,
@@ -42,18 +42,18 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 1.5,
-    elevation: 3,
+    elevation: 8,
     overflow: "hidden",
   },
-  cardItemImagePlace: {
+  cardImage: {
     backgroundColor: "#ccc",
     flex: 1,
-    minHeight: 359,
+    //minHeight: 359,
   },
   cardBody: {
     position: "absolute",
     bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: "rgba(0,0,0,0.15)",
     left: 0,
     right: 0,
   },
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MaterialCardWithTextOverImage;
+export default Card;

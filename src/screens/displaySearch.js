@@ -70,7 +70,7 @@ const displaySearch = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 15,
     flex: 1,
   },
   cover: {
