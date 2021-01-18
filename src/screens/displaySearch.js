@@ -8,6 +8,8 @@ import { Context as DiscogsContext } from "../context/discogsContext";
 
 const displaySearch = (props) => {
   const barcodeNum = props.navigation.state.params.data;
+  let discogsResponse = null;
+  let masterId = null;
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,9 +19,23 @@ const displaySearch = (props) => {
     (async () => {
       await barcodeSearch(barcodeNum);
       //console.log(state);
-      setIsLoading(false);
+      //setIsLoading(false);
+      //await state;
+
+      //console.log(state);
     })();
   }, [barcodeNum]);
+
+  useEffect(() => {
+    (async () => {
+      if (state.data !== undefined) {
+        discogsResponse = state.data.results[0];
+        masterId = discogsResponse.master_id;
+
+        setIsLoading(false);
+      }
+    })();
+  }, [state]);
 
   // const navigationProps = props.navigation.state.params;
   // const discogsResponse = navigationProps.response.data.results[0];
@@ -29,8 +45,6 @@ const displaySearch = (props) => {
   if (isLoading === true) {
     return <Loading loadingText="Loading..." />;
   } else {
-    const discogsResponse = state.data.results[0];
-
     /* try {
       const masterId = discogsResponse.master_id;
       (async () => {
