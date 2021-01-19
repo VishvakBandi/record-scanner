@@ -18,10 +18,11 @@ const discogsReducer = (state, action) => {
   }
 };
 
-const masterIdSearch = (dispatch) => {
-  return async (masterId) => {
+const releaseIdSearch = (dispatch) => {
+  return async (releaseId) => {
     try {
-      const APIString = "masters/" + masterId;
+      //console.log(releaseId);
+      const APIString = "releases/" + releaseId;
 
       const response = await discogsAPI.get(APIString);
 
@@ -82,6 +83,6 @@ const clearErrorMessage = (dispatch) => () => {
 // a provider and context are returned
 export const { Provider, Context } = createDataContext(
   discogsReducer,
-  { barcodeSearch, masterIdSearch, clearErrorMessage },
+  { barcodeSearch, releaseIdSearch, clearErrorMessage },
   { token: null, errorMessage: "" }
 );

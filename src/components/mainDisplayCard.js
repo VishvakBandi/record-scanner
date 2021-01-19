@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { navigate } from "../navigationRef";
 
 function Card(props) {
   return (
@@ -16,11 +17,17 @@ function Card(props) {
           </Text>
         </View>
         <View style={styles.actionBody}>
-          <TouchableOpacity style={styles.actionButton1}>
-            <Text style={styles.actionText1}>ACTION 1</Text>
+          <TouchableOpacity
+            style={styles.actionButton1}
+            onPress={() => navigate("Track", { data: props.releaseId })}
+          >
+            <Text style={styles.actionText1}>Tracklist</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton2}>
-            <Text style={styles.actionText2}>ACTION 2</Text>
+          <TouchableOpacity
+            style={styles.actionButton2}
+            onPress={() => navigate("Youtube", { data: props.releaseId })}
+          >
+            <Text style={styles.actionText2}>Youtube Videos</Text>
           </TouchableOpacity>
         </View>
       </View>
