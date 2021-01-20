@@ -18,16 +18,16 @@ function Card(props) {
         </View>
         <View style={styles.actionBody}>
           <TouchableOpacity
-            style={styles.actionButton1}
+            style={styles.actionButton}
             onPress={() => navigate("Track", { data: props.releaseId })}
           >
-            <Text style={styles.actionText1}>Tracklist</Text>
+            <Text style={styles.actionText}>Tracklist</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.actionButton2}
+            style={styles.actionButton}
             onPress={() => navigate("Youtube", { data: props.releaseId })}
           >
-            <Text style={styles.actionText2}>Youtube Videos</Text>
+            <Text style={styles.actionText}>Youtube Videos</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -84,20 +84,11 @@ const styles = StyleSheet.create({
     padding: 8,
     flexDirection: "row",
   },
-  actionButton1: {
+  actionButton: {
     padding: 8,
     height: 36,
   },
-  actionText1: {
-    fontSize: 14,
-    color: "#FFF",
-    opacity: 0.9,
-  },
-  actionButton2: {
-    padding: 8,
-    height: 36,
-  },
-  actionText2: {
+  actionText: {
     fontSize: 14,
     color: "#FFF",
     opacity: 0.9,
