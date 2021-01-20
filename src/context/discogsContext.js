@@ -7,7 +7,7 @@ const discogsReducer = (state, action) => {
   switch (action.type) {
     case "barcodeSearch":
       return { errorMessage: "", data: action.payload };
-    case "masterIdSearch":
+    case "releaseIdSearch":
       return { errorMessage: "", data: action.payload };
     case "add_error":
       return { ...state, errorMessage: action.payload };
@@ -26,7 +26,7 @@ const releaseIdSearch = (dispatch) => {
 
       const response = await discogsAPI.get(APIString);
 
-      dispatch({ type: "barcodeSearch", payload: response.data });
+      dispatch({ type: "releaseIdSearch", payload: response.data });
     } catch (err) {
       console.log(err);
 

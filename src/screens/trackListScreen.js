@@ -8,7 +8,7 @@ const trackScreen = (props) => {
   const releaseId = props.navigation.state.params.data;
   console.log(releaseId);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { state, releaseIdSearch } = useContext(DiscogsContext);
 
@@ -23,7 +23,7 @@ const trackScreen = (props) => {
   if (isLoading === true) {
     return <Loading loadingText="Loading..." />;
   } else {
-    //console.log(state);
+    console.log(state);
     return (
       <View style={styles.container}>
         <Text>track Screen</Text>
