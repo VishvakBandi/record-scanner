@@ -16,13 +16,18 @@ const displaySearch = (props) => {
 
   useEffect(() => {
     (async () => {
-      await barcodeSearch(barcodeNum);
+      let mounted = true;
 
-      setIsLoading(false);
+      if (mounted) {
+        await barcodeSearch(barcodeNum);
+
+        setIsLoading(false);
+      }
+      return () => (mounted = false);
     })();
   }, [barcodeNum]);
 
-  if (isLoading === true) {
+  if (isLoading === true || state.data.results[0] === undefined) {
     return <Loading loadingText="Loading..." />;
   } else {
     const discogsResponse = state.data.results[0];

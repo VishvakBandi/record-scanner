@@ -12,18 +12,23 @@ const trackScreen = (props) => {
 
   const { state, releaseIdSearch } = useContext(DiscogsContext);
 
-  useEffect(() => {
+  /* useEffect(() => {
     (async () => {
-      await releaseIdSearch(releaseId);
+      let mounted = true;
 
-      setIsLoading(false);
+      if (mounted) {
+        await releaseIdSearch(releaseId);
+
+        setIsLoading(false);
+      }
+      return () => (mounted = false);
     })();
-  }, [releaseId]);
+  }, [releaseId]); */
 
-  if (isLoading === true) {
+  if (isLoading === true || state.data === undefined) {
     return <Loading loadingText="Loading..." />;
   } else {
-    console.log(state);
+    //console.log(state);
     return (
       <View style={styles.container}>
         <Text>track Screen</Text>
