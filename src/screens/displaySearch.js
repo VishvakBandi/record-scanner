@@ -2,45 +2,36 @@ import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 
 import Loading from "../components/loadingScreen";
-import Card from "../components/card";
+import Card from "../components/mainDisplayCard";
 
 import { Context as DiscogsContext } from "../context/discogsContext";
+import { navigate } from "../navigationRef";
 
 const displaySearch = (props) => {
   const barcodeNum = props.navigation.state.params.data;
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const { state, barcodeSearch, masterIdSearch } = useContext(DiscogsContext);
+  const { state, barcodeSearch } = useContext(DiscogsContext);
 
   useEffect(() => {
     (async () => {
-      await barcodeSearch(barcodeNum);
-      //console.log(state);
-      setIsLoading(false);
+      let mounted = true;
+
+      if (mounted) {
+        await barcodeSearch(barcodeNum);
+
+        setIsLoading(false);
+      }
+      return () => (mounted = false);
     })();
   }, [barcodeNum]);
 
-  // const navigationProps = props.navigation.state.params;
-  // const discogsResponse = navigationProps.response.data.results[0];
-
-  //console.log(discogsResponse);
-
-  if (isLoading === true) {
+  if (isLoading === true || state.data.results[0] === undefined) {
     return <Loading loadingText="Loading..." />;
   } else {
     const discogsResponse = state.data.results[0];
-
-    /* try {
-      const masterId = discogsResponse.master_id;
-      (async () => {
-        await masterIdSearch(masterId);
-
-        console.log(state);
-      })();
-    } catch (err) {
-      console.log(err);
-    } */
+    const releaseId = discogsResponse.id;
 
     return (
       <View style={styles.container}>
@@ -50,20 +41,9 @@ const displaySearch = (props) => {
           title={discogsResponse.title}
           year={discogsResponse.year}
           genre={discogsResponse.genre}
+          releaseId={releaseId}
         />
       </View>
-
-      /*<View style={styles.container}>
-      <Text>Display Screen</Text>
-      <Image
-        style={styles.cover}
-        source={{ uri: discogsResponse.cover_image }}
-      />
-      <Text>
-        Scanned record - {discogsResponse.title}, released in the year
-        {discogsResponse.year}, under the label {discogsResponse.label[0]}
-      </Text>
-    </View>; */
     );
   }
 };

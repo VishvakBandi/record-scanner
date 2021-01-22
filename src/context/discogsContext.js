@@ -7,7 +7,7 @@ const discogsReducer = (state, action) => {
   switch (action.type) {
     case "barcodeSearch":
       return { errorMessage: "", data: action.payload };
-    case "masterIdSearch":
+    case "releaseIdSearch":
       return { errorMessage: "", data: action.payload };
     case "add_error":
       return { ...state, errorMessage: action.payload };
@@ -18,14 +18,15 @@ const discogsReducer = (state, action) => {
   }
 };
 
-const masterIdSearch = (dispatch) => {
-  return async (masterId) => {
+const releaseIdSearch = (dispatch) => {
+  return async (releaseId) => {
     try {
-      const APIString = "masters/" + masterId;
+      //console.log(releaseId);
+      const APIString = "releases/" + releaseId;
 
       const response = await discogsAPI.get(APIString);
 
-      dispatch({ type: "barcodeSearch", payload: response.data });
+      dispatch({ type: "releaseIdSearch", payload: response.data });
     } catch (err) {
       console.log(err);
 
@@ -82,6 +83,6 @@ const clearErrorMessage = (dispatch) => () => {
 // a provider and context are returned
 export const { Provider, Context } = createDataContext(
   discogsReducer,
-  { barcodeSearch, masterIdSearch, clearErrorMessage },
+  { barcodeSearch, releaseIdSearch, clearErrorMessage },
   { token: null, errorMessage: "" }
 );

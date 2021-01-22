@@ -7,6 +7,8 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import ScanScreen from "./src/screens/ScannerScreen";
 import HomeScreen from "./src/screens/Home";
 import ResultsScreen from "./src/screens/displaySearch";
+import TrackListScreen from "./src/screens/trackListScreen";
+import YoutubeScreen from "./src/screens/youtubeScreen";
 
 import { Provider as DiscogsProvider } from "./src/context/discogsContext";
 
@@ -43,6 +45,8 @@ const stackNavigator = createStackNavigator({
     }
   ),
   Results: ResultsScreen,
+  Track: TrackListScreen,
+  Youtube: YoutubeScreen,
 });
 
 const App = createAppContainer(stackNavigator);
