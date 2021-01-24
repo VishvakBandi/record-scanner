@@ -9,29 +9,42 @@ import { navigate } from "../navigationRef";
 
 const displaySearch = (props) => {
   const barcodeNum = props.navigation.state.params.data;
+  let discogsResponse;
+  let releaseId;
 
   const [isLoading, setIsLoading] = useState(true);
+  const [barcodeCall, setBarcodeCall] = useState(false);
 
-  const { state, barcodeSearch } = useContext(DiscogsContext);
+  const { state, barcodeSearch, releaseIdSearch } = useContext(DiscogsContext);
 
   useEffect(() => {
     (async () => {
-      let mounted = true;
-
-      if (mounted) {
+      if (barcodeCall === false) {
         await barcodeSearch(barcodeNum);
 
-        setIsLoading(false);
+        setBarcodeCall(true);
       }
-      return () => (mounted = false);
     })();
   }, [barcodeNum]);
 
-  if (isLoading === true || state.data.results[0] === undefined) {
+  useEffect(() => {
+    (async () => {
+      if (barcodeCall === true) {
+        discogsResponse = state.data.results[0];
+        releaseId = discogsResponse.id;
+
+        await releaseIdSearch(barcodeNum);
+        setIsLoading(false);
+      }
+    })();
+  }, [state, barcodeCall]);
+
+  if (isLoading === true) {
+    //console.log(state);
+    //console.log(barcodeCall);
     return <Loading loadingText="Loading..." />;
   } else {
-    const discogsResponse = state.data.results[0];
-    const releaseId = discogsResponse.id;
+    console.log(discogsResponse);
 
     return (
       <View style={styles.container}>
