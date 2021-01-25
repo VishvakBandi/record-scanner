@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Loading from "../components/loadingScreen";
 import Card from "../components/mainDisplayCard";
@@ -9,39 +10,55 @@ import { navigate } from "../navigationRef";
 
 const displaySearch = (props) => {
   const barcodeNum = props.navigation.state.params.data;
+  let albumImage;
 
   const [isLoading, setIsLoading] = useState(true);
+  const [barcodeCall, setBarcodeCall] = useState(false);
+  const [albumIdCall, setAlbumIdCall] = useState(false);
 
-  const { state, barcodeSearch } = useContext(DiscogsContext);
+  const { state, barcodeSearch, releaseIdSearch } = useContext(DiscogsContext);
 
   useEffect(() => {
     (async () => {
-      let mounted = true;
-
-      if (mounted) {
+      if (barcodeCall === false) {
         await barcodeSearch(barcodeNum);
 
+        setBarcodeCall(true);
+      }
+
+      if (barcodeCall === true && albumIdCall === false) {
+        try {
+          await AsyncStorage.setItem(
+            "albumImage",
+            state.data.results[0].cover_image
+          );
+          await releaseIdSearch(state.data.results[0].id);
+        } catch (err) {
+          console.log(err);
+        }
+
+        setAlbumIdCall(true);
         setIsLoading(false);
       }
-      return () => (mounted = false);
-    })();
-  }, [barcodeNum]);
 
-  if (isLoading === true || state.data.results[0] === undefined) {
+      if (albumIdCall === true) {
+        albumImage = await AsyncStorage.getItem("albumImage");
+        console.log(albumImage);
+      }
+    })();
+  }, [state]);
+
+  if (isLoading === true) {
     return <Loading loadingText="Loading..." />;
   } else {
-    const discogsResponse = state.data.results[0];
-    const releaseId = discogsResponse.id;
-
     return (
       <View style={styles.container}>
         <Card
           style={styles.cover}
-          coverImage={discogsResponse.cover_image}
-          title={discogsResponse.title}
-          year={discogsResponse.year}
-          genre={discogsResponse.genre}
-          releaseId={releaseId}
+          coverImage={albumImage}
+          title={state.data.title}
+          year={state.data.released}
+          genre={state.data.artists[0].name}
         />
       </View>
     );
