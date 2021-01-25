@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Loading from "../components/loadingScreen";
 import Card from "../components/mainDisplayCard";
@@ -9,8 +10,6 @@ import { navigate } from "../navigationRef";
 
 const displaySearch = (props) => {
   const barcodeNum = props.navigation.state.params.data;
-  let discogsResponse;
-  let releaseId;
 
   const [isLoading, setIsLoading] = useState(true);
   const [barcodeCall, setBarcodeCall] = useState(false);
@@ -30,8 +29,7 @@ const displaySearch = (props) => {
   useEffect(() => {
     (async () => {
       if (barcodeCall === true) {
-        discogsResponse = state.data.results[0];
-        releaseId = discogsResponse.id;
+        await AsyncStorage.setItem("barcodeInfo", state);
 
         await releaseIdSearch(barcodeNum);
         setIsLoading(false);
@@ -44,7 +42,11 @@ const displaySearch = (props) => {
     //console.log(barcodeCall);
     return <Loading loadingText="Loading..." />;
   } else {
-    console.log(discogsResponse);
+    //console.log(discogsResponse);
+    let discogsResponse;
+    (async () => {
+      discogsResponse = await AsyncStorage.getItem("barcodeInfo");
+    })();
 
     return (
       <View style={styles.container}>
