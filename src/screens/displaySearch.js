@@ -10,11 +10,11 @@ import { navigate } from "../navigationRef";
 
 const displaySearch = (props) => {
   const barcodeNum = props.navigation.state.params.data;
-  let albumImage;
 
   const [isLoading, setIsLoading] = useState(true);
   const [barcodeCall, setBarcodeCall] = useState(false);
   const [albumIdCall, setAlbumIdCall] = useState(false);
+  const [albumImage, setAlbumImage] = useState("");
 
   const { state, barcodeSearch, releaseIdSearch } = useContext(DiscogsContext);
 
@@ -38,15 +38,16 @@ const displaySearch = (props) => {
         }
 
         setAlbumIdCall(true);
-        setIsLoading(false);
       }
 
       if (albumIdCall === true) {
-        albumImage = await AsyncStorage.getItem("albumImage");
-        console.log(albumImage);
+        const tempAlbumImage = await AsyncStorage.getItem("albumImage");
+        setAlbumImage(tempAlbumImage);
+        console.log(tempAlbumImage);
+        setIsLoading(false);
       }
     })();
-  }, [state]);
+  }, [state, albumIdCall]);
 
   if (isLoading === true) {
     return <Loading loadingText="Loading..." />;
