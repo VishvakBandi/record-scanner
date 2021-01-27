@@ -1,7 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-const Home = () => {
+const youtubeVideos = (props) => {
+  console.log(props.navigation.state.params.data[1]);
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
@@ -19,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default youtubeVideos;

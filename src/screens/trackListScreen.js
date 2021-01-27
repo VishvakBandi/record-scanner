@@ -5,36 +5,13 @@ import Loading from "../components/loadingScreen";
 import { Context as DiscogsContext } from "../context/discogsContext";
 
 const trackScreen = (props) => {
-  const releaseId = props.navigation.state.params.data;
-  console.log(releaseId);
+  console.log(props);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { state, releaseIdSearch } = useContext(DiscogsContext);
-
-  /* useEffect(() => {
-    (async () => {
-      let mounted = true;
-
-      if (mounted) {
-        await releaseIdSearch(releaseId);
-
-        setIsLoading(false);
-      }
-      return () => (mounted = false);
-    })();
-  }, [releaseId]); */
-
-  if (isLoading === true || state.data === undefined) {
-    return <Loading loadingText="Loading..." />;
-  } else {
-    //console.log(state);
-    return (
-      <View style={styles.container}>
-        <Text>track Screen</Text>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <Text>track Screen</Text>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

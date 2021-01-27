@@ -43,7 +43,7 @@ const displaySearch = (props) => {
       if (albumIdCall === true) {
         const tempAlbumImage = await AsyncStorage.getItem("albumImage");
         setAlbumImage(tempAlbumImage);
-        console.log(tempAlbumImage);
+        //console.log(tempAlbumImage);
         setIsLoading(false);
       }
     })();
@@ -60,6 +60,7 @@ const displaySearch = (props) => {
           title={state.data.title}
           year={state.data.released}
           genre={state.data.artists[0].name}
+          videos={state.data.videos}
         />
       </View>
     );

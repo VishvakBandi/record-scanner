@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import { navigate } from "../navigationRef";
 
 function Card(props) {
-  console.log(props);
+  //console.log(props);
   return (
     <View style={[styles.container, props.style]}>
       <Image
@@ -26,7 +26,7 @@ function Card(props) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.actionButton}
-            //onPress={() => navigate("Youtube", { data: props.releaseId })}
+            onPress={() => navigate("Youtube", { data: props.videos })}
           >
             <Text style={styles.actionText}>Youtube Videos</Text>
           </TouchableOpacity>
